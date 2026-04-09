@@ -1,234 +1,124 @@
 "use client";
+import { useLang, Lang } from "@/lib/i18n";
 
-import { useEffect, useState } from "react";
+const translations: Record<Lang, {
+  title: string;
+  fn: string;
+  intro: string;
+  currentlyBuildingVal: string;
+  learningVal: string;
+  interestsVal: string;
+  goalVal: string;
+  philosophy: string;
+  philosophyText: string;
+  bjj: string;
+}> = {
+  en: {
+    title: "About",
+    fn: "aboutMe()",
+    intro: "I'm Tahir, a 15-year-old full stack developer from Novi Pazar, Serbia. I started programming at a young age, driven by my interest in video games and technology. In 6th grade, I enrolled in a Python course, and since then I've been continuously learning and improving my skills. I focus on the backend — building systems that actually work, not just look good.",
+    currentlyBuildingVal: "Mentorly (open-source ed-tech platform)",
+    learningVal: "C, Next.js, MySQL",
+    interestsVal: "Backend architecture, open source, entrepreneurship",
+    goalVal: "Build things that matter. Ship fast. Keep learning.",
+    philosophy: "// Philosophy",
+    philosophyText: "I believe in writing clean code, shipping early, and always asking why something works before copy-pasting it. Being 15 doesn't mean waiting — it means starting now.",
+    bjj: "// I also train BJJ & MMA — your databases will be secure. ;)",
+  },
+  sr: {
+    title: "O meni",
+    fn: "aboutMe()",
+    intro: "Ja sam Tahir, 15-godišnji full stack developer iz Novog Pazara, Srbija. Počeo sam da programiram u mladosti, vođen interesovanjem za video igre i tehnologiju. U šestom razredu sam upisao kurs Python-a, i od tada kontinuirano učim i unapređujem svoje veštine. Fokusiram se na backend — gradim sisteme koji zaista rade, a ne samo lepo izgledaju.",
+    currentlyBuildingVal: "Mentorly (open-source ed-tech platforma)",
+    learningVal: "C, Next.js, MySQL",
+    interestsVal: "Backend arhitektura, open source, preduzetništvo",
+    goalVal: "Graditi stvari koje imaju smisao. Isporučivati brzo. Stalno učiti.",
+    philosophy: "// Filozofija",
+    philosophyText: "Vjerujem u čist kod, rano lansiranje i uvijek postavljanje pitanja zašto nešto funkcioniše prije kopiranja. Imati 15 godina ne znači čekati — znači početi odmah.",
+    bjj: "// Treniram i BJJ & MMA — vaše baze podataka su sigurne. ;)",
+  },
+};
 
-const lines = [
-  { tokens: [
-    { t: "const ", c: "tok-keyword" },
-    { t: "developer", c: "tok-var" },
-    { t: " = {", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  name", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: '"Tahir Bibić"', c: "tok-string" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  age", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: "15", c: "tok-number" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  role", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: '"Full Stack Developer"', c: "tok-string" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  focus", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: '"Backend"', c: "tok-string" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  location", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: '"Novi Pazar, RS"', c: "tok-string" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [
-    { t: "  available", c: "tok-prop" },
-    { t: ": ", c: "tok-punc" },
-    { t: "true", c: "tok-keyword" },
-    { t: ",", c: "tok-punc" },
-  ]},
-  { tokens: [{ t: "};", c: "tok-punc" }]},
-];
+export default function About() {
+  const { lang } = useLang();
+  const tx = translations[lang];
 
-export default function Hero() {
-  const [visibleLines, setVisibleLines] = useState(0);
-  const [showCursor, setShowCursor] = useState(true);
-
-  useEffect(() => {
-    let current = 0;
-    const interval = setInterval(() => {
-      current++;
-      setVisibleLines(current);
-      if (current >= lines.length) clearInterval(interval);
-    }, 180);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const t = setInterval(() => setShowCursor((c) => !c), 530);
-    return () => clearInterval(t);
-  }, []);
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const lines = [
+    { tokens: [{ t: "const ", c: "tok-keyword" }, { t: "aboutMe", c: "tok-fn" }, { t: " = () => ({", c: "tok-punc" }] },
+    { tokens: [{ t: "  currentlyBuilding", c: "tok-prop" }, { t: ": ", c: "tok-punc" }, { t: `"${tx.currentlyBuildingVal}"`, c: "tok-string" }, { t: ",", c: "tok-punc" }] },
+    { tokens: [{ t: "  learning", c: "tok-prop" }, { t: ": ", c: "tok-punc" }, { t: `"${tx.learningVal}"`, c: "tok-string" }, { t: ",", c: "tok-punc" }] },
+    { tokens: [{ t: "  interests", c: "tok-prop" }, { t: ": ", c: "tok-punc" }, { t: `"${tx.interestsVal}"`, c: "tok-string" }, { t: ",", c: "tok-punc" }] },
+    { tokens: [{ t: "  goal", c: "tok-prop" }, { t: ": ", c: "tok-punc" }, { t: `"${tx.goalVal}"`, c: "tok-string" }, { t: ",", c: "tok-punc" }] },
+    { tokens: [{ t: "});", c: "tok-punc" }] },
+  ];
 
   return (
     <section
-      className="min-h-screen flex flex-col justify-center px-6 md:px-16 py-20 relative overflow-hidden"
+      className="min-h-screen px-6 md:px-16 py-20"
       style={{ background: "var(--vsc-bg)" }}
     >
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(86,156,214,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(86,156,214,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
+      <div className="flex items-center gap-3 mb-10">
+        <div className="w-1 h-6 rounded" style={{ background: "var(--vsc-blue)" }} />
+        <span className="text-xs uppercase tracking-widest" style={{ color: "var(--vsc-blue)" }}>
+          about.tsx
+        </span>
+        <div className="flex-1 h-px" style={{ background: "var(--vsc-border)" }} />
+      </div>
 
-      {/* Glow orbs */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,122,204,0.08) 0%, transparent 70%)",
-          top: "10%",
-          right: "10%",
-        }}
-      />
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        {/* Left: prose */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4" style={{ color: "#fff" }}>
+            {tx.title}{" "}
+            <span style={{ color: "var(--vsc-blue)" }}>{tx.fn}</span>
+          </h2>
+          <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--vsc-text-dim)", lineHeight: "1.9" }}>
+            {tx.intro}
+          </p>
 
-      <div className="relative z-10 max-w-4xl">
-        {/* File path breadcrumb */}
-        <div className="flex items-center gap-1 mb-8 text-xs" style={{ color: "var(--vsc-text-dim)" }}>
-          <span>tahir-portfolio</span>
-          <span>/</span>
-          <span>src</span>
-          <span>/</span>
-          <span style={{ color: "var(--vsc-green)" }}>hero.tsx</span>
+          <p
+            className="text-[11px] italic opacity-60 mb-8"
+            style={{ color: "var(--vsc-comment)", fontFamily: "'Fira Code', monospace" }}
+          >
+            {tx.bjj}
+          </p>
+
+          <div className="rounded-md p-4" style={{ background: "#1a1a1a", border: "1px solid var(--vsc-border)" }}>
+            <div className="text-xs mb-2" style={{ color: "var(--vsc-comment)", fontFamily: "'Fira Code', monospace", fontStyle: "italic" }}>
+              {tx.philosophy}
+            </div>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--vsc-text-dim)", fontFamily: "'Fira Code', monospace", fontSize: "12px" }}>
+              {tx.philosophyText}
+            </p>
+          </div>
         </div>
 
-        {/* Line numbers + code block */}
+        {/* Right: code block */}
         <div
-          className="rounded-md overflow-hidden mb-10"
-          style={{
-            background: "#1a1a1a",
-            border: "1px solid var(--vsc-border)",
-            fontFamily: "'Fira Code', monospace",
-            fontSize: "clamp(13px, 2vw, 16px)",
-          }}
+          className="rounded-md overflow-hidden"
+          style={{ background: "#1a1a1a", border: "1px solid var(--vsc-border)", fontFamily: "'Fira Code', monospace", fontSize: "clamp(11px, 1.5vw, 14px)" }}
         >
-          {/* Code title bar */}
-          <div
-            className="flex items-center gap-2 px-4 py-2"
-            style={{ background: "#252526", borderBottom: "1px solid var(--vsc-border)" }}
-          >
+          <div className="flex items-center gap-2 px-4 py-2" style={{ background: "#252526", borderBottom: "1px solid var(--vsc-border)" }}>
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#f44747" }} />
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#dcdcaa" }} />
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#4ec9b0" }} />
-            <span className="ml-2 text-xs" style={{ color: "var(--vsc-text-dim)" }}>developer.ts</span>
+            <span className="ml-2 text-xs" style={{ color: "var(--vsc-text-dim)" }}>about.ts</span>
           </div>
-
           <div className="p-4 md:p-6">
             {lines.map((line, i) => (
-              <div
-                key={i}
-                className="flex items-start leading-relaxed"
-                style={{
-                  opacity: i < visibleLines ? 1 : 0,
-                  transition: "opacity 0.2s ease",
-                }}
-              >
-                {/* Line number */}
-                <span
-                  className="select-none mr-6 text-right shrink-0"
-                  style={{ width: "1.5rem", color: "var(--vsc-text-dim)", fontSize: "0.85em" }}
-                >
+              <div key={i} className="flex items-start leading-relaxed">
+                <span className="select-none mr-6 text-right shrink-0" style={{ width: "1.5rem", color: "var(--vsc-text-dim)", fontSize: "0.85em" }}>
                   {i + 1}
                 </span>
-                {/* Tokens */}
                 <span>
                   {line.tokens.map((tok, j) => (
                     <span key={j} className={tok.c}>{tok.t}</span>
                   ))}
-                  {/* Cursor on last visible line */}
-                  {i === visibleLines - 1 && visibleLines < lines.length && (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: "2px",
-                        height: "1.1em",
-                        background: "var(--vsc-accent)",
-                        verticalAlign: "text-bottom",
-                        opacity: showCursor ? 1 : 0,
-                        transition: "opacity 0.1s",
-                        marginLeft: "1px",
-                      }}
-                    />
-                  )}
                 </span>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Tagline */}
-        <p
-          className="mb-8 fade-up fade-up-3 text-sm md:text-base leading-relaxed max-w-xl"
-          style={{ color: "var(--vsc-comment)", fontStyle: "italic" }}
-        >
-          {/* comment style */}
-          {"// Started early. Building seriously."}
-          <br />
-          {"// Backend-first. Always learning."}
-        </p>
-
-        {/* CTAs */}
-        <div className="flex flex-wrap gap-4 fade-up fade-up-4">
-          <button
-            onClick={() => scrollTo("projects")}
-            className="px-6 py-3 rounded font-medium transition-all text-sm"
-            style={{
-              background: "var(--vsc-accent)",
-              color: "#fff",
-              border: "1px solid var(--vsc-accent)",
-              fontFamily: "'Fira Code', monospace",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "#1f8ad2")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "var(--vsc-accent)")}
-          >
-            {"view_my_work()"}
-          </button>
-          <button
-            onClick={() => scrollTo("contact")}
-            className="px-6 py-3 rounded font-medium transition-all text-sm"
-            style={{
-              background: "transparent",
-              color: "var(--vsc-green)",
-              border: "1px solid var(--vsc-green)",
-              fontFamily: "'Fira Code', monospace",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "rgba(78,201,176,0.1)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "transparent";
-            }}
-          >
-            {"contact_me()"}
-          </button>
-        </div>
-      </div>
-
-      {/* Scroll hint */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40"
-        style={{ fontSize: "10px", color: "var(--vsc-text-dim)" }}
-      >
-        <span>scroll</span>
-        <div className="w-px h-8" style={{ background: "var(--vsc-border)" }} />
       </div>
     </section>
   );

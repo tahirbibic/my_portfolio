@@ -40,12 +40,9 @@ const activityIcons = [
 ];
 
 export default function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
-  const scrollTo = (id: string) => {
-    setActiveSection(id);
-  };
-
   return (
-    <div className="flex" style={{ borderRight: "1px solid var(--vsc-border)" }}>
+    // Hidden entirely on mobile — we use bottom nav instead
+    <div className="hidden md:flex" style={{ borderRight: "1px solid var(--vsc-border)" }}>
       {/* Activity bar */}
       <div
         className="flex flex-col items-center py-2 gap-2"
@@ -72,18 +69,15 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
 
       {/* Explorer panel */}
       <div
-        className="hidden md:flex flex-col"
+        className="flex flex-col"
         style={{ width: "200px", background: "var(--vsc-sidebar)", fontSize: "12px" }}
       >
-        {/* Panel header */}
         <div
           className="px-3 py-2 uppercase tracking-widest font-semibold"
           style={{ color: "#bbb", fontSize: "10px", borderBottom: "1px solid var(--vsc-border)" }}
         >
           Explorer
         </div>
-
-        {/* Folder */}
         <div className="px-3 py-1" style={{ color: "#cccccc" }}>
           <div className="flex items-center gap-1 py-1 cursor-default" style={{ fontSize: "12px" }}>
             <span style={{ fontSize: "10px" }}>▼</span>
@@ -98,7 +92,7 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
               {files.map((f) => (
                 <button
                   key={f.id}
-                  onClick={() => scrollTo(f.id)}
+                  onClick={() => setActiveSection(f.id)}
                   className="flex items-center gap-2 py-0.5 px-1 rounded text-left w-full transition-all"
                   style={{
                     color: activeSection === f.id ? "#fff" : "var(--vsc-text-dim)",

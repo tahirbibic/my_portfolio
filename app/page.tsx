@@ -11,6 +11,14 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import StatusBar from "@/components/StatusBar";
 
+const mobileNav = [
+  { id: "hero",     icon: "🏠", label: "Home",     color: "#4ec9b0" },
+  { id: "about",    icon: "👤", label: "About",    color: "#569cd6" },
+  { id: "skills",   icon: "⚡", label: "Skills",   color: "#dcdcaa" },
+  { id: "projects", icon: "📦", label: "Projects", color: "#ce9178" },
+  { id: "contact",  icon: "✉️",  label: "Contact",  color: "#c586c0" },
+];
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const [openTabs, setOpenTabs] = useState(["hero"]);
@@ -44,16 +52,75 @@ export default function Home() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw", overflow: "hidden", background: "#1e1e1e" }}>
       <Titlebar lang={lang} setLang={setLang} />
+
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
         <Sidebar activeSection={activeSection} setActiveSection={openTab} />
+
         <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden" }}>
-          <TabBar activeSection={activeSection} setActiveSection={openTab} openTabs={openTabs} closeTab={closeTab} />
+          <TabBar
+            activeSection={activeSection}
+            setActiveSection={openTab}
+            openTabs={openTabs}
+            closeTab={closeTab}
+          />
+          {/* Content — add bottom padding on mobile so content isn't hidden behind bottom nav */}
           <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", background: "#1e1e1e" }}>
-            {pages[activeSection]}
+            <div className="pb-16 md:pb-0">
+              {pages[activeSection]}
+            </div>
           </div>
         </div>
       </div>
+
       <StatusBar activeSection={activeSection} />
+
+      {/* Mobile bottom navigation */}
+      <div
+        className="flex md:hidden"
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: "#252526",
+          borderTop: "1px solid #3c3c3c",
+          height: "56px",
+          zIndex: 50,
+        }}
+      >
+        {mobileNav.map((item) => {
+          const isActive = activeSection === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => openTab(item.id)}
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "2px",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                borderTop: isActive ? `2px solid ${item.color}` : "2px solid transparent",
+              }}
+            >
+              <span style={{ fontSize: "18px" }}>{item.icon}</span>
+              <span
+                style={{
+                  fontSize: "9px",
+                  fontFamily: "'Fira Code', monospace",
+                  color: isActive ? item.color : "#858585",
+                }}
+              >
+                {item.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

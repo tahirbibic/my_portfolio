@@ -39,25 +39,25 @@ export default function TabBar({ activeSection, setActiveSection, openTabs, clos
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
-              padding: "0 12px",
+              gap: "6px",
+              padding: "0 10px",
               height: "100%",
               cursor: "pointer",
               background: isActive ? "#1e1e1e" : "transparent",
               borderRight: "1px solid #3c3c3c",
               borderTop: isActive ? "1px solid #007acc" : "1px solid transparent",
               color: isActive ? "#fff" : "#8d8d8d",
-              fontSize: "12px",
+              fontSize: "11px",
               fontFamily: "'Fira Code', monospace",
               flexShrink: 0,
               userSelect: "none",
-              minWidth: "120px",
+              minWidth: "80px", // reduced from 120px for mobile
             }}
           >
             <span
               style={{
-                width: "8px",
-                height: "8px",
+                width: "7px",
+                height: "7px",
                 borderRadius: "50%",
                 background: meta.color,
                 display: "inline-block",
@@ -65,7 +65,7 @@ export default function TabBar({ activeSection, setActiveSection, openTabs, clos
                 opacity: isActive ? 1 : 0.5,
               }}
             />
-            <span style={{ color: isActive ? meta.color : "#8d8d8d", flex: 1 }}>
+            <span style={{ color: isActive ? meta.color : "#8d8d8d", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {meta.label}
             </span>
             <span
@@ -74,10 +74,10 @@ export default function TabBar({ activeSection, setActiveSection, openTabs, clos
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: "16px",
-                height: "16px",
+                width: "14px",
+                height: "14px",
                 borderRadius: "3px",
-                fontSize: "14px",
+                fontSize: "13px",
                 color: "#8d8d8d",
                 flexShrink: 0,
               }}

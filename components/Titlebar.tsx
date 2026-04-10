@@ -1,5 +1,5 @@
 "use client";
-import { Lang } from "@/lib/i18n";   
+import { Lang } from "@/lib/i18n";
 
 interface TitlebarProps {
   lang: Lang;
@@ -13,7 +13,7 @@ export default function Titlebar({ lang, setLang }: TitlebarProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 16px",
+        padding: "0 12px",
         background: "#3c3c3c",
         borderBottom: "1px solid #2d2d2d",
         height: "30px",
@@ -24,18 +24,24 @@ export default function Titlebar({ lang, setLang }: TitlebarProps) {
       }}
     >
       {/* Traffic lights */}
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
         <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#ff5f57" }} />
         <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#febc2e" }} />
         <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#28c840" }} />
       </div>
 
-      {/* Title */}
-      <span>tahir-bibic — portfolio.tsx — Visual Studio Code</span>
+      {/* Title — hidden on mobile */}
+      <span className="hidden md:block" style={{ fontSize: "11px" }}>
+        tahir-bibic — portfolio.tsx — Visual Studio Code
+      </span>
+      <span className="block md:hidden" style={{ fontSize: "11px" }}>
+        portfolio.tsx
+      </span>
 
-      {/* Right side: menu + language toggle */}
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-        <div style={{ display: "flex", gap: "16px", fontSize: "11px", opacity: 0.7 }}>
+      {/* Right side */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        {/* Menu items — hidden on mobile */}
+        <div className="hidden md:flex" style={{ gap: "16px", fontSize: "11px", opacity: 0.7 }}>
           <span>File</span>
           <span>Edit</span>
           <span>View</span>

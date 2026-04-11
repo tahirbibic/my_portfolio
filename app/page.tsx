@@ -7,7 +7,9 @@ import TabBar from "@/components/TabBar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
+import Thrive from "@/components/projects/Thrive";
+import Mentorly from "@/components/projects/Mentorly";
+import BuugHive from "@/components/projects/BuugHive";
 import Contact from "@/components/Contact";
 import StatusBar from "@/components/StatusBar";
 
@@ -15,7 +17,7 @@ const mobileNav = [
   { id: "hero",     icon: "🏠", label: "Home",     color: "#4ec9b0" },
   { id: "about",    icon: "👤", label: "About",    color: "#569cd6" },
   { id: "skills",   icon: "⚡", label: "Skills",   color: "#dcdcaa" },
-  { id: "projects", icon: "📦", label: "Projects", color: "#ce9178" },
+  { id: "thrive",   icon: "📁", label: "Projects", color: "#ce9178" },
   { id: "contact",  icon: "✉️",  label: "Contact",  color: "#c586c0" },
 ];
 
@@ -28,7 +30,9 @@ export default function Home() {
     hero:     <Hero />,
     about:    <About />,
     skills:   <Skills />,
-    projects: <Projects />,
+    thrive:   <Thrive />,
+    mentorly: <Mentorly />,
+    buughive: <BuugHive />,
     contact:  <Contact />,
   };
 
@@ -52,10 +56,8 @@ export default function Home() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw", overflow: "hidden", background: "#1e1e1e" }}>
       <Titlebar lang={lang} setLang={setLang} />
-
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
         <Sidebar activeSection={activeSection} setActiveSection={openTab} />
-
         <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden" }}>
           <TabBar
             activeSection={activeSection}
@@ -63,7 +65,6 @@ export default function Home() {
             openTabs={openTabs}
             closeTab={closeTab}
           />
-          {/* Content — add bottom padding on mobile so content isn't hidden behind bottom nav */}
           <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", background: "#1e1e1e" }}>
             <div className="pb-16 md:pb-0">
               {pages[activeSection]}
@@ -71,10 +72,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <StatusBar activeSection={activeSection} />
 
-      {/* Mobile bottom navigation */}
+      {/* Mobile bottom nav */}
       <div
         className="flex md:hidden"
         style={{
@@ -89,7 +89,12 @@ export default function Home() {
         }}
       >
         {mobileNav.map((item) => {
-          const isActive = activeSection === item.id;
+          // "Projects" button on mobile opens Thrive by default (first project)
+          const isActive =
+            item.id === "thrive"
+              ? ["thrive", "mentorly", "buughive"].includes(activeSection)
+              : activeSection === item.id;
+
           return (
             <button
               key={item.id}

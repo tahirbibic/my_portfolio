@@ -8,11 +8,13 @@ interface TabBarProps {
 }
 
 const tabMeta: Record<string, { label: string; color: string }> = {
-  hero:     { label: "hero.tsx",     color: "#4ec9b0" },
-  about:    { label: "about.tsx",    color: "#569cd6" },
-  skills:   { label: "skills.tsx",   color: "#dcdcaa" },
-  projects: { label: "projects.tsx", color: "#ce9178" },
-  contact:  { label: "contact.tsx",  color: "#c586c0" },
+  hero:     { label: "hero.tsx",       color: "#4ec9b0" },
+  about:    { label: "about.tsx",      color: "#569cd6" },
+  skills:   { label: "skills.tsx",     color: "#dcdcaa" },
+  contact:  { label: "contact.tsx",    color: "#c586c0" },
+  thrive:   { label: "Thrive.tsx",     color: "#4ec9b0" },
+  mentorly: { label: "Mentorly.tsx",   color: "#c586c0" },
+  buughive: { label: "BuugHive.tsx",   color: "#f4b942" },
 };
 
 export default function TabBar({ activeSection, setActiveSection, openTabs, closeTab }: TabBarProps) {
@@ -31,6 +33,7 @@ export default function TabBar({ activeSection, setActiveSection, openTabs, clos
     >
       {openTabs.map((id) => {
         const meta = tabMeta[id];
+        if (!meta) return null;
         const isActive = activeSection === id;
         return (
           <div
@@ -51,7 +54,7 @@ export default function TabBar({ activeSection, setActiveSection, openTabs, clos
               fontFamily: "'Fira Code', monospace",
               flexShrink: 0,
               userSelect: "none",
-              minWidth: "80px", // reduced from 120px for mobile
+              minWidth: "80px",
             }}
           >
             <span

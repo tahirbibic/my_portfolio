@@ -1,15 +1,21 @@
 "use client";
+import { useState } from "react";
 
 interface SidebarProps {
   activeSection: string;
   setActiveSection: (s: string) => void;
 }
 
+const projectFiles = [
+  { id: "thrive",   label: "Thrive.tsx",   icon: "🌱", color: "#4ec9b0" },
+  { id: "mentorly", label: "Mentorly.tsx", icon: "🎓", color: "#c586c0" },
+  { id: "buughive", label: "BuugHive.tsx", icon: "🐛", color: "#f4b942" },
+];
+
 const files = [
   { id: "hero",     label: "hero.tsx",     icon: "🏠", color: "#4ec9b0" },
   { id: "about",    label: "about.tsx",    icon: "👤", color: "#569cd6" },
   { id: "skills",   label: "skills.tsx",   icon: "⚡", color: "#dcdcaa" },
-  { id: "projects", label: "projects.tsx", icon: "📦", color: "#ce9178" },
   { id: "contact",  label: "contact.tsx",  icon: "✉️",  color: "#c586c0" },
 ];
 
@@ -39,9 +45,17 @@ const activityIcons = [
   )},
 ];
 
+const isProjectSection = (id: string) =>
+  projectFiles.some((p) => p.id === id);
+
 export default function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
+  const [projectsOpen, setProjectsOpen] = useState(isProjectSection(activeSection));
+
+  const handleProjectsFolder = () => {
+    setProjectsOpen((prev) => !prev);
+  };
+
   return (
-    // Hidden entirely on mobile — we use bottom nav instead
     <div className="hidden md:flex" style={{ borderRight: "1px solid var(--vsc-border)" }}>
       {/* Activity bar */}
       <div
@@ -89,6 +103,7 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
               <span>src</span>
             </div>
             <div className="ml-4 flex flex-col gap-0.5">
+              {/* Regular files */}
               {files.map((f) => (
                 <button
                   key={f.id}
@@ -104,6 +119,50 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
                   <span style={{ color: activeSection === f.id ? f.color : undefined }}>{f.label}</span>
                 </button>
               ))}
+
+              {/* Projects folder */}
+              <div>
+                <button
+                  onClick={handleProjectsFolder}
+                  className="flex items-center gap-2 py-0.5 px-1 rounded text-left w-full transition-all"
+                  style={{
+                    color: isProjectSection(activeSection) ? "#fff" : "var(--vsc-text-dim)",
+                    background: isProjectSection(activeSection) ? "rgba(38,79,120,0.4)" : "transparent",
+                    fontSize: "12px",
+                  }}
+                >
+                  <span style={{ fontSize: "10px", color: "#858585" }}>
+                    {projectsOpen ? "▼" : "▶"}
+                  </span>
+                  <span>📁</span>
+                  <span style={{ color: isProjectSection(activeSection) ? "#ce9178" : undefined }}>
+                    projects
+                  </span>
+                </button>
+
+                {/* Sub-files */}
+                {projectsOpen && (
+                  <div className="ml-4 flex flex-col gap-0.5 mt-0.5">
+                    {projectFiles.map((p) => (
+                      <button
+                        key={p.id}
+                        onClick={() => setActiveSection(p.id)}
+                        className="flex items-center gap-2 py-0.5 px-1 rounded text-left w-full transition-all"
+                        style={{
+                          color: activeSection === p.id ? "#fff" : "var(--vsc-text-dim)",
+                          background: activeSection === p.id ? "var(--vsc-highlight, #264f78)" : "transparent",
+                          fontSize: "12px",
+                        }}
+                      >
+                        <span>{p.icon}</span>
+                        <span style={{ color: activeSection === p.id ? p.color : undefined }}>
+                          {p.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

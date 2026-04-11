@@ -57,7 +57,8 @@ export default function About() {
       className="min-h-screen px-6 md:px-16 py-20"
       style={{ background: "var(--vsc-bg)" }}
     >
-      <div className="flex items-center gap-3 mb-10">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-10 fade-up fade-up-1">
         <div className="w-1 h-6 rounded" style={{ background: "var(--vsc-blue)" }} />
         <span className="text-xs uppercase tracking-widest" style={{ color: "var(--vsc-blue)" }}>
           about.tsx
@@ -67,7 +68,7 @@ export default function About() {
 
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-start">
         {/* Left: prose */}
-        <div>
+        <div className="fade-up fade-up-2">
           <h2 className="text-2xl font-semibold mb-4" style={{ color: "#fff" }}>
             {tx.title}{" "}
             <span style={{ color: "var(--vsc-blue)" }}>{tx.fn}</span>
@@ -95,7 +96,7 @@ export default function About() {
 
         {/* Right: code block */}
         <div
-          className="rounded-md overflow-hidden"
+          className="rounded-md overflow-hidden fade-up fade-up-3"
           style={{ background: "#1a1a1a", border: "1px solid var(--vsc-border)", fontFamily: "'Fira Code', monospace", fontSize: "clamp(11px, 1.5vw, 14px)" }}
         >
           <div className="flex items-center gap-2 px-4 py-2" style={{ background: "#252526", borderBottom: "1px solid var(--vsc-border)" }}>

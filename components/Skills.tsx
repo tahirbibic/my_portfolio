@@ -77,7 +77,7 @@ export default function Skills() {
       style={{ background: "var(--vsc-bg)" }}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-10">
+      <div className="flex items-center gap-3 mb-10 fade-up fade-up-1">
         <div className="w-1 h-6 rounded" style={{ background: "var(--vsc-yellow)" }} />
         <span className="text-xs uppercase tracking-widest" style={{ color: "var(--vsc-yellow)" }}>
           {tx.file}
@@ -86,19 +86,19 @@ export default function Skills() {
       </div>
 
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-2" style={{ color: "#fff" }}>
+        <h2 className="text-2xl font-semibold mb-2 fade-up fade-up-2" style={{ color: "#fff" }}>
           {tx.title}{" "}
           <span style={{ color: "var(--vsc-yellow)" }}>{tx.fn}</span>
         </h2>
-        <p className="text-xs mb-10" style={{ color: "var(--vsc-comment)", fontFamily: "'Fira Code', monospace", fontStyle: "italic" }}>
+        <p className="text-xs mb-10 fade-up fade-up-2" style={{ color: "var(--vsc-comment)", fontFamily: "'Fira Code', monospace", fontStyle: "italic" }}>
           {tx.comment}
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {skillGroups.map((group) => (
+          {skillGroups.map((group, i) => (
             <div
               key={group.key}
-              className="rounded-md overflow-hidden"
+              className={`rounded-md overflow-hidden fade-up fade-up-${i + 3}`}
               style={{ background: "#1a1a1a", border: "1px solid var(--vsc-border)" }}
             >
               <div
@@ -145,7 +145,7 @@ export default function Skills() {
         </div>
 
         <div
-          className="mt-10 rounded-md p-4 flex items-start gap-3"
+          className="mt-10 rounded-md p-4 flex items-start gap-3 fade-up fade-up-5"
           style={{ background: "#1a1a1a", border: "1px solid var(--vsc-border)" }}
         >
           <span style={{ color: "var(--vsc-yellow)", fontSize: "18px" }}>⚡</span>

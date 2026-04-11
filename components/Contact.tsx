@@ -97,7 +97,8 @@ export default function Contact() {
       className="min-h-screen px-6 md:px-16 py-20"
       style={{ background: "var(--vsc-bg)", borderTop: "1px solid var(--vsc-border)" }}
     >
-      <div className="flex items-center gap-3 mb-10">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-10 fade-up fade-up-1">
         <div className="w-1 h-6 rounded" style={{ background: "var(--vsc-purple)" }} />
         <span className="text-xs uppercase tracking-widest" style={{ color: "var(--vsc-purple)" }}>
           contact.tsx
@@ -106,7 +107,8 @@ export default function Contact() {
       </div>
 
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-        <div>
+        {/* Left: links */}
+        <div className="fade-up fade-up-2">
           <h2 className="text-2xl font-semibold mb-2" style={{ color: "#fff" }}>
             {tx.heading}{" "}
             <span style={{ color: "var(--vsc-purple)" }}>{tx.fn}</span>
@@ -143,7 +145,8 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="rounded-md overflow-hidden" style={{ border: "1px solid var(--vsc-border)", background: "#0d0d0d" }}>
+        {/* Right: terminal */}
+        <div className="rounded-md overflow-hidden fade-up fade-up-3" style={{ border: "1px solid var(--vsc-border)", background: "#0d0d0d" }}>
           <div className="flex items-center gap-2 px-4 py-2" style={{ background: "#252526", borderBottom: "1px solid var(--vsc-border)" }}>
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#f44747" }} />
             <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#dcdcaa" }} />
@@ -200,7 +203,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="mt-20 text-center" style={{ color: "var(--vsc-text-dim)", fontSize: "12px", fontFamily: "'Fira Code', monospace" }}>
+      <div className="mt-20 text-center fade-up fade-up-4" style={{ color: "var(--vsc-text-dim)", fontSize: "12px", fontFamily: "'Fira Code', monospace" }}>
         <span style={{ color: "var(--vsc-comment)", fontStyle: "italic" }}>{tx.footer}</span>
       </div>
     </section>
